@@ -2,11 +2,13 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Category;
-use App\Entity\Trip;
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
+use Time;
 use Faker\Factory;
+use App\Entity\Trip;
+use App\Entity\Category;
+use App\Entity\Localisation;
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class AppFixtures extends Fixture
 {
@@ -35,6 +37,15 @@ class AppFixtures extends Fixture
             $manager->persist($category); // Ajoute à la BDD
         }
 
+        $localisation = new Localisation();
+        $localisation
+            ->setStart($faker->latitude() . ',' . $faker->longitude())
+            ->setFinish($faker->latitude() . ',' . $faker->longitude())
+            ->setDuration($faker->numerify('###'))
+            ->setDistance($faker->numerify('###.###'))
+            ;
+        $manager->persist($localisation);
+
         for ($i=0; $i < 1000; $i++) { 
             $trip = new Trip();
             $trip
@@ -46,6 +57,7 @@ class AppFixtures extends Fixture
                 ->setStatus($faker->boolean(70))
                 // Ici on utilise le tableau de categories pour en assigner à l'objet Trip
                 ->setCategory($faker->randomElement($categoryArray))
+                ->setLocalisation($localisation)
             ;
 
             $manager->persist($trip);

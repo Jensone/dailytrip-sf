@@ -25,7 +25,7 @@ class Localisation
     #[ORM\Column(type: Types::DECIMAL, precision: 8, scale: 2)]
     private ?string $distance = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    #[ORM\Column(length: 10)]
     private ?\DateTimeInterface $duration = null;
 
     /**
@@ -83,12 +83,12 @@ class Localisation
         return $this;
     }
 
-    public function getDuration(): ?\DateTimeInterface
+    public function getDuration(): ?string
     {
         return $this->duration;
     }
 
-    public function setDuration(\DateTimeInterface $duration): static
+    public function setDuration($duration): static
     {
         $this->duration = $duration;
 
