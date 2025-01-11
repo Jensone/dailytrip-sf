@@ -27,32 +27,34 @@ class AppFixtures extends Fixture
             'Îles'
         ];
         $categoryArray = []; // Tableau vide
-        for ($i=0; $i < count($categories); $i++) { 
+        for ($i = 0; $i < count($categories); $i++) {
             $category = new Category();
             $category
                 ->setName($categories[$i])
-                ->setImage('https://picsum.photos/300/300?random='.$i)
+                ->setImage('https://picsum.photos/300/300?random=' . $i)
             ;
             array_push($categoryArray, $category); // Ajout dans le tableau
             $manager->persist($category); // Ajoute à la BDD
         }
 
-        $localisation = new Localisation();
-        $localisation
-            ->setStart($faker->latitude() . ',' . $faker->longitude())
-            ->setFinish($faker->latitude() . ',' . $faker->longitude())
-            ->setDuration($faker->numerify('###'))
-            ->setDistance($faker->numerify('###.###'))
+        for ($i = 0; $i < 1000; $i++) {
+            // Création d'un localisation
+            $localisation = new Localisation();
+            $localisation
+                ->setStart($faker->latitude() . ',' . $faker->longitude())
+                ->setFinish($faker->latitude() . ',' . $faker->longitude())
+                ->setDuration($faker->numerify('###'))
+                ->setDistance($faker->numerify('###.###'))
             ;
-        $manager->persist($localisation);
+            $manager->persist($localisation);
 
-        for ($i=0; $i < 1000; $i++) { 
+            // Création d'un trip
             $trip = new Trip();
             $trip
-                ->setRef(uniqid('trip-', true))
+                ->setRef(uniqid('trip-')) // Génération d'un identifiant unique
                 ->setTitle($faker->sentence(3))
                 ->setDescription($faker->paragraph(4))
-                ->setCover('https://picsum.photos/1280/720?random='.$i)
+                ->setCover('https://picsum.photos/1280/720?random=' . $i)
                 ->setEmail($faker->email())
                 ->setStatus($faker->boolean(70))
                 // Ici on utilise le tableau de categories pour en assigner à l'objet Trip
