@@ -26,7 +26,7 @@ class Localisation
     private ?string $distance = null;
 
     #[ORM\Column(length: 10)]
-    private ?\DateTimeInterface $duration = null;
+    private ?string $duration = null;
 
     /**
      * @var Collection<int, Poi>
