@@ -69,7 +69,7 @@ symfony server:ca:install
 
 ## Twig
 
-Twhig est un moteur de template pour symfony. Il permet de coder des vues avec un HTML surpuissant. On dispose de fonctions et de filtres pour faire des calculs et des transformations.
+Twig est un moteur de template pour symfony. Il permet de coder des vues avec un HTML surpuissant. On dispose de fonctions et de filtres pour faire des calculs et des transformations.
 
 ### Syntaxe
 
@@ -91,7 +91,7 @@ Le fichier base.html.twig contient le code HTML de base, il est utilisé par tou
 
 ### fonction Twig
 
-Quelque foctions très utiles :
+Quelques foctions très utiles :
 
 |Fonction|Description|Syntaxe|
 |---|---|---|
@@ -121,7 +121,7 @@ Les annotation permettent de mettre en place du contexte et des règles pour le 
 
 ## Repository
 
-La classe Repository est une classe qui contient des méthodes pour récupérer des données. Elle est fournie par Symfony et est utilisée pour accéder aux données de la base de données. Les échanges liés aux données reposent sur l'ORM Doctrine.
+La classe Repository est une classe qui contient des méthodes pour récupérer des données. Elle est fournie par Symfony et est utilisée pour accéder aux données de la base de données. Les échanges liés aux données qui reposent sur l'ORM Doctrine.
 
 ### Transférer des données à une vue
 
