@@ -23,16 +23,16 @@ Puis dans le terminal, grâce à symfony-cli, créer la BDD :
 ```bash
 # Créer la BDD
 symfony console doctrine:database:create
-# Raccourci
-symfony console d:d:c
+```
 
+```bash
 # Créer le ficher de migration
 symfony console make:migration
+```
 
+```bash
 # Exécuter les migrations
 symfony console doctrine:migrations:migrate
-# Raccourci
-symfony console d:m:m -n
 ```
 
 ---
@@ -77,9 +77,9 @@ La syntaxte est simple et se compose de trois parties :
 
 |Type|Exemple|
 |---|---|
-|Variables|{{ variable }}|
-|Fonctions|{{ fonction(variable) }}|
-|Filtres|{{ variable|filtre }}|
+|Variables|`{{ variable }}`|
+|Fonctions|`{{ fonction(variable) }}`|
+|Filtres|`{{ variable|filtre }}`|
 
 Les variables sont des variables PHP, les fonctions sont des fonctions PHP et les filtres sont des filtres PHP.
 
@@ -95,12 +95,12 @@ Quelques foctions très utiles :
 
 |Fonction|Description|Syntaxe|
 |---|---|---|
-|dump|Affiche les données en format JSON|{{ dump(variable) }}|
-|trans|Traduit une chaîne de caractères|{{ 'Chaîne de caractères'|trans }}|
-|for|Exécute une boucle|{% for item in variable %}{% endfor %}|
-|if|Exécute une condition|{% if variable %}{% endif %}|
-|else|Exécute une condition|{% if variable %}{% else %}{% endif %}|
-|elseif|Exécute une condition|{% if variable %}{% elseif variable %}{% endif %}|
+|dump|Affiche les données en format JSON|`{{ dump(variable) }}`|
+|trans|Traduit une chaîne de caractères|`{{ 'Chaîne de caractères'|trans }}`|
+|for|Exécute une boucle|`{% for item in variable %}{% endfor %}`|
+|if|Exécute une condition|`{% if variable %}{% endif %}`|
+|else|Exécute une condition|`{% if variable %}{% else %}{% endif %}`|
+|elseif|Exécute une condition|`{% if variable %}{% elseif variable %}{% endif %}`|
 
 ---
 
@@ -114,8 +114,8 @@ Les annotation permettent de mettre en place du contexte et des règles pour le 
 
 |Annotation|Description|Syntaxe|
 |---|---|---|
-|#[Route]|Définit la route pour le contrôleur|#[Route('/path', name: 'name', methods: ['GET', 'POST'])]|
-|#[IsGranted]|Définit les droits pour le contrôleur|#[IsGranted('ROLE_USER')]|
+|`#[Route]`|Définit la route pour le contrôleur|`#[Route('/path', name: 'name', methods: ['GET', 'POST'])]`|
+|`#[IsGranted]`|Définit les droits pour le contrôleur|`#[IsGranted('ROLE_USER')]`|
 
 ---
 
