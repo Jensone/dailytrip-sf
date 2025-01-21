@@ -1,1 +1,10 @@
+body {
+    background-color: #F8FAFC;
+    font-family: "Inter", sans-serif;
+}
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Roboto Condensed", sans-serif;
+    letter-spacing: .01rem;
+    color: #0c274e;
+}
