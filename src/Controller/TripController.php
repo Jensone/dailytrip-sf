@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\TripType;
 use App\Repository\TripRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,6 +47,29 @@ class TripController extends AbstractController
             'trip' => $trip,
             'title' => $trip->getTitle(),
             'description' => $trip->getDescription() ?? $trip->getTitle(),
+        ]);
+    }
+
+    /**
+     * Création d'un trip
+     */
+    #[Route('/trip/create', name: 'app_trip_create', methods: ['GET', 'POST'])]
+    public function create(): Response
+    {
+        return $this->render('trip/create.html.twig', []);
+    }
+
+    /**
+     * Édition d'un trip
+     */
+    #[Route('/trip/{ref}/edit', name: 'app_trip_edit', methods: ['GET', 'POST'])]
+    public function edit(TripRepository $tr, string $ref): Response
+    {
+        $trip = $tr->findOneBy(['ref' => $ref]);
+        $form = $this->createForm(TripType::class, $trip);
+        return $this->render('trip/edit.html.twig', [
+            'trip' => $trip,
+            'tripForm' => $form
         ]);
     }
 }

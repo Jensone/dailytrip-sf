@@ -3,6 +3,24 @@
 {% block title %}{{ 'Profile page'|trans }}{% endblock %}
 
 {% block body %}
+
+{% set progress = 0 %}
+{% if app.user.isVerified %}
+    {% set progress = progress + 33 %}
+{% endif %}
+
+{% if app.user.username %}
+    {% set progress = progress + 33 %}
+{% endif %}
+
+{% if app.user.trips|length > 0 %} {# Si l'user à poster un trip minimum #}
+    {% if progress > 65  %} {# Si le score est supérieur à 65, donc 66 #}
+        {% set progress = progress + 34 %} {# On ajoute 34 pour avoir 100% #}
+    {% else %} {# Sinon #}
+        {% set progress = progress + 33 %} {# On ajoute 33, car il y a 0 ou 33% #}
+    {% endif %}
+{% endif %}
+
 <section class="pt-3">
 	<div class="container">
 		<div class="row">
@@ -33,38 +51,44 @@
 								<div class="text-center mb-3">
 									<!-- Avatar -->
 									<div class="avatar avatar-xl mb-2">
-										<img class="avatar-img rounded-circle border border-2 border-white" src="assets/images/avatar/01.jpg" alt="">
+										<img class="avatar-img rounded-circle border border-2 border-white" src="https://avatar.iran.liara.run/public/90" alt="{{ app.user.username ?? 'N/A'}}">
 									</div>
-									<h6 class="mb-0">Jacqueline Miller</h6>
-									<a href="#" class="text-reset text-primary-hover small">hello@gmail.com</a>
+									<h6 class="mb-0">{{ app.user.username ?? 'N/A'}}</h6>
+									<a href="#" class="text-reset text-primary-hover small">{{ app.user.email ?? 'N/A' }}</a>
 									<hr>
 								</div>
 
 								<!-- Sidebar menu item START -->
 								<ul class="nav nav-pills-primary-soft flex-column">
 									<li class="nav-item">
-										<a class="nav-link active" href="account-profile.html"><i class="bi bi-person fa-fw me-2"></i>My Profile</a>
+										<a class="nav-link active" href="account-profile.html">
+                                            <i class="bi bi-map fa-fw me-2"></i>{{'My trips'|trans}}
+                                        </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="account-bookings.html"><i class="bi bi-ticket-perforated fa-fw me-2"></i>My Bookings</a>
+										<a class="nav-link" href="account-bookings.html">
+                                            <i class="bi bi-plus-circle fa-fw me-2"></i>{{'Add a trip'|trans}}
+                                        </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="account-travelers.html"><i class="bi bi-people fa-fw me-2"></i>Travelers</a>
+										<a class="nav-link" href="account-travelers.html">
+                                            <i class="bi bi-stars fa-fw me-2"></i>{{'My ratings'|trans}}
+                                        </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="account-payment-details.html"><i class="bi bi-wallet fa-fw me-2"></i>Payment Details</a>
+										<a class="nav-link" href="account-payment-details.html">
+                                            <i class="bi bi-text-center fa-fw me-2"></i>{{'My reviews'|trans}}
+                                        </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="account-wishlist.html"><i class="bi bi-heart fa-fw me-2"></i>Wishlist</a>
+										<a class="nav-link" href="account-delete.html">
+                                            <i class="bi bi-trash fa-fw me-2"></i>{{'Delete Profile'|trans}}
+                                        </a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" href="account-settings.html"><i class="bi bi-gear fa-fw me-2"></i>Settings</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="account-delete.html"><i class="bi bi-trash fa-fw me-2"></i>Delete Profile</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link text-danger bg-danger-soft-hover" href="#"><i class="fas fa-sign-out-alt fa-fw me-2"></i>Sign Out</a>
+										<a class="nav-link text-danger bg-danger-soft-hover" href={{ path('app_logout') }}>
+                                            <i class="fas fa-sign-out-alt fa-fw me-2"></i>{{'Sign Out'|trans}}
+                                        </a>
 									</li>
 								</ul>
 								<!-- Sidebar menu item END -->
@@ -94,18 +118,37 @@
 						<div class="overflow-hidden">
 							<h6>Complete Your Profile</h6>
 							<div class="progress progress-sm bg-success bg-opacity-10">
-								<div class="progress-bar bg-success aos aos-init aos-animate" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">
-								<span class="progress-percent-simple h6 fw-light ms-auto">85%</span>
+								<div class="progress-bar bg-success aos aos-init aos-animate" role="progressbar" data-aos="slide-right" data-aos-delay="200" data-aos-duration="1000" data-aos-easing="ease-in-out" style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+								<span class="progress-percent-simple h6 fw-light ms-auto">{{ progress }}%</span>
 							</div>
 						</div>
-						<p class="mb-0">Get the best out of booking by adding the remaining details!</p>
 						</div>
 						<!-- Content -->
 						<div class="bg-body rounded p-3 mt-3">
 							<ul class="list-inline hstack flex-wrap gap-2 justify-content-between mb-0">
-								<li class="list-inline-item h6 fw-normal mb-0"><a href="#"><i class="bi bi-check-circle-fill text-success me-2"></i>Verified Email</a></li>
-								<li class="list-inline-item h6 fw-normal mb-0"><a href="#"><i class="bi bi-check-circle-fill text-success me-2"></i>Verified Mobile Number</a></li>
-								<li class="list-inline-item h6 fw-normal mb-0"><a href="#" class="text-primary"><i class="bi bi-plus-circle-fill me-2"></i>Complete Basic Info</a></li>
+								<li class="list-inline-item h6 fw-normal mb-0">
+                                    <p>
+                                        <i class="me-2 bi {{ app.user.isVerified ? 'bi-check-circle-fill text-success' : 'bi-x-circle-fill text-danger'}}"></i>
+                                        {{'Verified Email'|trans}}
+                                    </p>
+                                </li>
+								<li class="list-inline-item h6 fw-normal mb-0">
+                                    <p>
+                                        <i class="me-2 bi {{ app.user.username ? 'bi-check-circle-fill text-success' : 'bi-x-circle-fill text-danger'}}"></i>
+                                        {{'Username defined'|trans}}
+                                    </p>
+                                </li>
+								<li class="list-inline-item h6 fw-normal mb-0">
+                                    <p>
+                                    {% if app.user.trips|length > 0 %}
+                                        <i class="me-2 bi bi-check-circle-fill text-success"></i>
+                                    {% else %}
+                                        <i class="me-2 bi bi-x-circle-fill text-danger"></i>
+                                    {% endif %}
+                                        {{'First Trip posted'|trans}}
+                                    </p>
+                                </li>
+								
 							</ul>
 						</div>
 					</div>

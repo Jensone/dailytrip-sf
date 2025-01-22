@@ -18,12 +18,12 @@
                         <p class="card-text">{{ item.description ? item.description|slice(0, 30) : ''}}...</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href={{ path('app_trip', { 'ref': item.ref }) }} class="btn btn-sm btn-outline-secondary">Découvrir</a>
+                                <a href={{ path('app_trip', { 'ref': item.ref }) }} class="btn btn-sm btn-outline-secondary">{{'Discover'|trans}}</a>
                                 {% if app.user == item.author %} {# Si l'user est le propriétaire du trip #}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                    <a href={{ path('app_trip_edit', { 'ref': item.ref }) }} class="btn btn-sm btn-outline-secondary">
                                         {{ ux_icon('mdi:pencil', { 'class': 'h-1 w-1' }) }}
                                         Editer
-                                    </button>
+                                    </a>
                                 {% endif %}
                             </div>
                             <small class="text-body-secondary">{{ item.localisation.distance }} km</small>
