@@ -1,20 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PageController!{% endblock %}
+{% block title %}
+	{{ 'Homepage'|trans }}
+{% endblock %}
+
+{# {% block javascripts %}
+	<script src="https://cdn.tailwindcss.com"></script>
+{% endblock %} #}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+	<div>
+		<div class="position-relative d-grid place-items-center mx-auto mb-5" style="max-width: 42rem; height: 620px;">
+			<div class="position-absolute top-5 d-flex align-items-center justify-content-between w-100" style="height: 230px; z-index: 50;">
+				<img src={{ asset('medias/cloud.png') }} alt="cloud 1" class="align-self-end shadow" style="filter: brightness(1.25); width: 180px; animation: float 6s ease-in-out infinite;">
+				<img src={{ asset('medias/cloud.png') }} alt="cloud 2" class="align-self-start shadow" style="filter: brightness(1.25); width: 100px; animation: float 6s ease-in-out infinite;">
+				<img src={{ asset('medias/cloud.png') }} alt="cloud 3" class="align-self-end shadow" style="filter: brightness(1.25); width: 80px; animation: float 6s ease-in-out infinite;">
+				<img src={{ asset('medias/cloud.png') }} alt="cloud 4" class="shadow" style="filter: brightness(1.25); width: 150px; animation: float 6s ease-in-out infinite;">
+			</div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+			<div class="position-absolute" style="z-index: 40; bottom: -16rem;">
+				<img src={{ asset('medias/dailytrip.svg') }} alt="logo dailytrip" class="w-100 h-100">
+			</div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Users/mba-m2/Lab/dailytrip-sf/src/Controller/PageController.php</code></li>
-        <li>Your template at <code>/Users/mba-m2/Lab/dailytrip-sf/templates/page/index.html.twig</code></li>
-    </ul>
-</div>
+			<div class="position-absolute bottom-0" style="background: white; filter: blur(40px); height: 18rem; width: 11rem; border-radius: 9999px; z-index: 30;"></div>
+
+			<div class="position-relative w-100 h-100" style="z-index: 30;"></div>
+
+			<div class="position-absolute rounded shadow-lg" style="z-index: 10; left: 12rem; width: 280px; height: 400px; background-image: url({{ asset('/medias/images/vtt.jpg')}}); background-position: center; background-size: cover;"></div>
+
+			<div class="position-absolute bottom-0 d-flex justify-content-between align-items-center w-100">
+				<div class="rounded shadow-lg" style="z-index: 0; right: 0; width: 280px; height: 400px; background-image: url({{ asset('/medias/images/roadtrip.jpg')}}); background-position: center; background-size: cover;"></div>
+
+				<div class="rounded shadow-lg" style="z-index: 20; left: 0; width: 280px; height: 400px; background-image: url({{ asset('/medias/images/desert.jpg')}}); background-position: center; background-size: cover;"></div>
+			</div>
+		</div>
+
+		<div>
+			<div class="text-center">
+				<h1 class="fw-bold text-uppercase">
+					En route pour<br><span class="display-1">l'aventure</span>
+				</h1>
+				<br>
+				<a href="#" class="btn btn-outline-primary transition" style="&:hover { color: white; background-color: #0c274e; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }">
+					C'est parti
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Section CTA -->
 {% endblock %}
