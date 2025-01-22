@@ -8,6 +8,7 @@
     <div class="my-4">
         <h1 class="fs-1 text-bold">Toutes les aventures partagées</h1>
     </div>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
         {% for item in trips %}
             <div class="col">
@@ -18,8 +19,11 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a href={{ path('app_trip', { 'ref': item.ref }) }} class="btn btn-sm btn-outline-secondary">Découvrir</a>
-                                {% if app.user %}
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">M</button>
+                                {% if app.user == item.author %} {# Si l'user est le propriétaire du trip #}
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">
+                                        {{ ux_icon('mdi:pencil', { 'class': 'h-1 w-1' }) }}
+                                        Editer
+                                    </button>
                                 {% endif %}
                             </div>
                             <small class="text-body-secondary">{{ item.localisation.distance }} km</small>
@@ -29,7 +33,10 @@
             </div>
         {% endfor %}
     
-    
+    </div>
+
+    <div class="navigation my-6 w-100">
+        {{ knp_pagination_render(trips) }}
     </div>
 
 
