@@ -17,6 +17,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR'); // Chargement de Faker
 
+        ini_set('memory_limit', '1024M');
 
         // Récupétration des Trips
         $tripArray = [];
